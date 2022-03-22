@@ -10,10 +10,7 @@ group = "org.vnovolotskiy"
 version = getVersionFromChangelog()
 
 repositories {
-    //        mavenCentral() //needed only locally w/o VPN available
-    maven { setUrl("https://nexus-new.tcsbank.ru/repository/mvn-maven-proxy") }
-    maven { setUrl("https://nexus-new.tcsbank.ru/repository/mvn_processing_snapshot") }
-    maven { setUrl("https://nexus-new.tcsbank.ru/repository/mvn_processing_release") }
+            mavenCentral()
 }
 
 dependencies {
@@ -27,8 +24,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     runtimeOnly("org.springframework.boot:spring-boot-devtools")
-
-    implementation("ru.tinkoff.acm.acm-billing-app:acm-billing-api-model:0.5.0-RELEASE")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

@@ -1,15 +1,18 @@
 package org.vnovolotskiy.controller
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import org.vnovolotskiy.service.Service
+import org.vnovolotskiy.service.AmqpProducer
 import ru.tinkoff.acm.billing.api.model.messages.request.EcommPayRequest
 
 @RestController
 class Controller(
-    private val service: Service
+    private val amqpProducer: AmqpProducer,
+    private val objectMapper: ObjectMapper
 ) {
 
     companion object {
@@ -17,11 +20,13 @@ class Controller(
     }
 
     @PostMapping("/start")
-    fun start(request: EcommPayRequest): String {
-        log.info("Process start reqeust: {}", request)
+    fun start(@RequestBody request: EcommPayRequest): String {
+        log.info("Process start with row reqeust: {}", request)
 
-        service.send(request)
+        amqpProducer.send(request)
 
         return "OK"
     }
+
+    @PostMapping("/")
 }

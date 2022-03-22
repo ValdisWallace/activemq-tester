@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.*
 import com.fasterxml.jackson.databind.deser.DeserializationProblemHandler
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -31,10 +32,11 @@ class ObjectMapperConfig {
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
-        objectMapper.registerModule(ParameterNamesModule())
+        objectMapper
+            .registerModule(ParameterNamesModule())
             .registerModule(Jdk8Module())
             .registerModule(JavaTimeModule())
-            .registerModule(JavaTimeModule())
+//            .registerModule(KotlinModule())
         objectMapper.addHandler(object : DeserializationProblemHandler() {
             @Throws(IOException::class)
             override fun handleUnknownProperty(

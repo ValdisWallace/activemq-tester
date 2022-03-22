@@ -1,7 +1,10 @@
+server:
+  port: '8099'
+
 spring:
   rabbitmq:
-    host: 'ds-paym-rabbitmq-test.tcsbank.ru'
+    host: 'rabbitmq-dev.online-acq.local'
     port: 5672
-    username: 'acm-billing-app'
-    password: 'acm-billing-app'
+    username: 'qr-acm'
+    password: '12345678'
     virtual-host: 'acm'
